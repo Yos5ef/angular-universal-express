@@ -2,17 +2,18 @@
 
 angular 同构 express
 
-1.下载所需要的包
+##1.下载所需要的包
 
 `
 npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader @nguniversal/express-engine
 `
-2.更改src/app/app.module.ts
+##2.更改src/app/app.module.ts
 
-`
+```javascript
 BrowserModule.withServerTransition({ appId: 'tour-of-heroes' })
-`
-`
+```
+
+```
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -23,11 +24,11 @@ import { isPlatformBrowser } from '@angular/common';
       'in the browser' : 'on the server';
     console.log(`Running ${platform} with appId=${appId}`);
   }
-`
+```
 
-3.添加src/app/app.server.module.ts
+##3.添加src/app/app.server.module.ts
 
-`
+```
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
@@ -47,10 +48,11 @@ import { AppComponent } from './app.component';
   bootstrap: [ AppComponent ],
 })
 export class AppServerModule {}
-`
+```
 
-4.添加sever.ts文件
-`
+##4.添加sever.ts文件
+
+```
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
  
@@ -103,11 +105,11 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Node server listening on http://localhost:${PORT}`);
 });
-`
+```
 
-5.添加src/tsconfig.server.json文件
+##5.添加src/tsconfig.server.json文件
 
-`
+```
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
@@ -124,9 +126,11 @@ app.listen(PORT, () => {
     "entryModule": "app/app.server.module#AppServerModule"
   }
 }
-`
-6.添加webpack.server.config.js文件
-`
+```
+
+##6.添加webpack.server.config.js文件
+
+```
 const path = require('path');
 const webpack = require('webpack');
  
@@ -159,13 +163,16 @@ module.exports = {
     )
   ]
 };
-`
-7.添加src/main.server.ts
-`
+```
+##7.添加src/main.server.ts
+
+```
 export { AppServerModule } from './app/app.server.module';
-`
-8.更改angular.json文件
-`
+```
+
+##8.更改angular.json文件
+
+```
 添加
 "server": {
           "builder": "@angular-devkit/build-angular:server",
@@ -175,9 +182,11 @@ export { AppServerModule } from './app/app.server.module';
             "tsConfig": "src/tsconfig.server.json"
           }
         }
-`
+```
+
 在这个位置加上
-`
+
+```
 "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -198,22 +207,26 @@ export { AppServerModule } from './app/app.server.module';
             "tsConfig": "src/tsconfig.server.json"
           }
         }
-`
-9.更改package.json
+```
+
+##9.更改package.json
 在scripts区域里加上
-`
+
+```
 "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
 "serve:ssr": "node dist/server",
 "build:client-and-server-bundles": "ng build --prod && ng run client:server",
 "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
-`
+```
+
 注意
 client位置要改成自己的项目名 比如 项目名为 project-name 就改成 project-name:ssr
 
-10.最后运行两条命令
-`
+##10.最后运行两条命令
+
+```
 npm run build:ssr
 npm run serve:ssr
-`
+```
 
 
