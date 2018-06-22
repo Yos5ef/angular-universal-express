@@ -2,7 +2,7 @@
 
 angular 同构 express
 
-##1.下载所需要的包
+## 1.下载所需要的包
 
 `
 npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader @nguniversal/express-engine
@@ -50,7 +50,7 @@ import { AppComponent } from './app.component';
 export class AppServerModule {}
 ```
 
-##4.添加sever.ts文件
+## 4.添加sever.ts文件
 
 ```javascript
 import 'zone.js/dist/zone-node';
@@ -171,9 +171,9 @@ export { AppServerModule } from './app/app.server.module';
 ```
 
 ## 8.更改angular.json文件
+添加
 
 ```javascript
-添加
 "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
