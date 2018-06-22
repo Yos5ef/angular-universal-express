@@ -7,13 +7,13 @@ angular 同构 express
 `
 npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader @nguniversal/express-engine
 `
-##2.更改src/app/app.module.ts
+## 2.更改src/app/app.module.ts
 
 ```javascript
 BrowserModule.withServerTransition({ appId: 'tour-of-heroes' })
 ```
 
-```
+```javascript
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -26,9 +26,9 @@ import { isPlatformBrowser } from '@angular/common';
   }
 ```
 
-##3.添加src/app/app.server.module.ts
+## 3.添加src/app/app.server.module.ts
 
-```
+```javascript
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
@@ -52,7 +52,7 @@ export class AppServerModule {}
 
 ##4.添加sever.ts文件
 
-```
+```javascript
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
  
@@ -107,9 +107,9 @@ app.listen(PORT, () => {
 });
 ```
 
-##5.添加src/tsconfig.server.json文件
+## 5.添加src/tsconfig.server.json文件
 
-```
+```javascript
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
@@ -128,9 +128,9 @@ app.listen(PORT, () => {
 }
 ```
 
-##6.添加webpack.server.config.js文件
+## 6.添加webpack.server.config.js文件
 
-```
+```javascript
 const path = require('path');
 const webpack = require('webpack');
  
@@ -164,15 +164,15 @@ module.exports = {
   ]
 };
 ```
-##7.添加src/main.server.ts
+## 7.添加src/main.server.ts
 
-```
+```javascript
 export { AppServerModule } from './app/app.server.module';
 ```
 
-##8.更改angular.json文件
+## 8.更改angular.json文件
 
-```
+```javascript
 添加
 "server": {
           "builder": "@angular-devkit/build-angular:server",
@@ -186,7 +186,7 @@ export { AppServerModule } from './app/app.server.module';
 
 在这个位置加上
 
-```
+```javascript
 "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -209,10 +209,10 @@ export { AppServerModule } from './app/app.server.module';
         }
 ```
 
-##9.更改package.json
+## 9.更改package.json
 在scripts区域里加上
 
-```
+```javascript
 "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
 "serve:ssr": "node dist/server",
 "build:client-and-server-bundles": "ng build --prod && ng run client:server",
@@ -222,9 +222,9 @@ export { AppServerModule } from './app/app.server.module';
 注意
 client位置要改成自己的项目名 比如 项目名为 project-name 就改成 project-name:ssr
 
-##10.最后运行两条命令
+## 10.最后运行两条命令
 
-```
+```javascript
 npm run build:ssr
 npm run serve:ssr
 ```
