@@ -4,9 +4,9 @@ angular 同构 express
 
 ## 1.下载所需要的包
 
-`
-npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader @nguniversal/express-engine
-`
+```
+npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader @nguniversal/express-engine express @types/express
+```
 ## 2.更改src/app/app.module.ts
 
 ```javascript
