@@ -50,7 +50,7 @@ import { AppComponent } from './app.component';
 export class AppServerModule {}
 ```
 
-## 4.添加sever.ts文件
+## 4.添加server.ts文件
 
 ```javascript
 import 'zone.js/dist/zone-node';
